@@ -16,20 +16,26 @@ namespace TiendaMvc.Controllers
         // Conexion a base de datos con Entity
         private Tienda25Entities db = new Tienda25Entities();
 
-        public ActionResult Etiquetas()
+        public ActionResult Productos()
         {
             
             // Asigno al ViewBag etiquetas
             ViewBag.etiquetas = db.Etiqueta.ToList();
             // Asigno al ViewBag almacenes
             ViewBag.almacenes = db.Almacen.ToList();
-            
-            return View();
+
+            var data = db.Producto;
+            return View(data);
         }
 
         // GET: Listado de almacenes
         public ActionResult Index()
         {
+
+
+            //almacenProducto.Find(o => o.Etiqueta.Equals())
+            // obtener almacen producto
+            ViewBag.productos = db.Producto.ToList();
             // obtener listado de etiquetas
             var info = db.Etiqueta;
             // guardo objeto en ViewBag

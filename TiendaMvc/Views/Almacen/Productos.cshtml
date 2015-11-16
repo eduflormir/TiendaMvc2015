@@ -1,0 +1,27 @@
+﻿@using TiendaMvc.Models
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>Lista de Productos</h2>
+
+@{
+    ViewBag.Title = "Index";
+    var etiquetas = ViewBag.etiquetas as List<Etiqueta>;
+
+}
+
+
+@if (etiquetas != null)
+{
+
+    foreach (var et in etiquetas)
+    {
+        <p>@et.texto</p>
+        
+    }
+
+}
+
+

@@ -191,7 +191,7 @@
     <Content Include="Views\Almacen\Index.cshtml" />
     <Content Include="Views\Almacen\Modificar.cshtml" />
     <Content Include="Views\Shared\_fichaAlmacen.cshtml" />
-    <Content Include="Views\Almacen\Etiquetas.cshtml" />
+    <Content Include="Views\Almacen\Productos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

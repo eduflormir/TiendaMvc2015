@@ -1,10 +1,26 @@
-﻿@using TiendaMvc.Models
+﻿@using System.Collections.Specialized
+@using System.Linq
+@using TiendaMvc.Models
 @model IEnumerable< TiendaMvc.Models.Almacen>
 
 @{
     ViewBag.Title = "Index";
     var etiq = ViewBag.etiquetas as List<Etiqueta>;
-    
+    var productos = ViewBag.productos as List<Producto>;
+
+}
+<h1>
+    @ViewData["Titulo"]
+</h1>
+
+@foreach (var et in etiq)
+{
+    <p>@et.texto</p>
+    <p>Productos:</p>
+}
+@foreach (var item in Model)
+{
+    @Html.Partial("_fichaAlmacen", item)
 }
 
 <h2>Listado de almacenes</h2>
@@ -19,14 +35,19 @@
 
 }
 
-<script>
-    $(".borrame").click(function() {
-        var r = confirm("Estas seguro?");
-        if (r) {
-            var id = $(this).attr("data-id");
-            location.href = "@Url.Action("Borrar")"+id;
-        }
-    });
-</script>
+@section MiJavaScript
+{
+    <script>
+        $(".borrame").click(function() {
+            var r = confirm("Estas seguro?");
+            if (r) {
+                var id = $(this).attr("data-id");
+                location.href = "@Url.Action("Borrar")" + "/" + id;
+
+
+            }
+        });
+    </script>
+}
 
 
