@@ -1,0 +1,58 @@
+﻿@model TiendaMvc.Models.Producto
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fabricante_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fabricante_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_corta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_corta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_coste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_coste)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_venta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_venta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_producto }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

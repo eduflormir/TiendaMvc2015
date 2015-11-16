@@ -1,0 +1,27 @@
+﻿@model TiendaMvc.Models.Almacen
+
+@{
+    ViewBag.Title = "Modificar";
+    Layout = "Layout";
+}
+
+<h2>Modificar un Almacen</h2>
+
+@using (Html.BeginForm())
+{
+    // BeginForm utilizar Modificar de tipo POST en almacenController
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false) // false incluye todos los mensajes de error
+    // para hacer el update usamos un campo oculto
+    // oculta el contenido de un campo
+    @Html.HiddenFor(o=>o.id_almacen)
+
+    <div>
+        @Html.LabelFor(o=>o.ciudad)
+        @Html.EditorFor(o => o.ciudad)
+
+        @Html.LabelFor(o => o.nombre)
+        @Html.EditorFor(o => o.nombre)
+    </div>
+}
+
