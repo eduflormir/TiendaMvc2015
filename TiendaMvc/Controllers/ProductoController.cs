@@ -7,10 +7,11 @@ using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
 {
-    public class ProductoController : BaseController
+    public class ProductoController : Controller
     {
         // Conexion a base de datos con Entity
         Tienda25Entities db = new Tienda25Entities();
+        
         // GET: Producto
         public ActionResult Alta()
         {
@@ -25,11 +26,22 @@ namespace TiendaMvc.Controllers
             return View(data);
         }
 
-        public ActionResult Detalle(int id)
+        // por del Model binder debe ser = nombre
+        public ActionResult Detalle(String nombre)
         {
-            var data = db.Producto.Find(id);
+            var nom = nombre.Replace("_", " ");
+            var data = db.Producto.FirstOrDefault(o => o.nombre == nom);
+            // si no encuentro, te mando al listado de productos
+            if(data==null)
+                return RedirectToAction("Index");
             return View(data);
         }
+
+        //public ActionResult Detalle(int id)
+        //{
+        //    var data = db.Producto.Find(id);
+        //    return View(data);
+        //}
 
         [HttpPost] // Unicamente por Post
         // llega la petición desde Http
