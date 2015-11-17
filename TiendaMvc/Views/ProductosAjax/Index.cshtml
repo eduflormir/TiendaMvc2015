@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TiendaMvc.Models.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+
+<input type="text" id="txtBusqueda" placeholder="Texto a buscar..."/>
+<input type="button" id="btnBus" value="Buscar"/>
+
+<div id="listado">
+    @Html.Partial("_listadoProducto", Model)
+</div>
+
+<div>
+    <input type="text" id="txtIdCategoria" placeholder="Id Categoria" />
+    <input type="text" id="txtNombre" placeholder="Nombre"/>
+    <input type="text" id="txtDescripcion" placeholder="Descripción"/>
+    <input type="text" id="txtFabricante" placeholder="Fabricante"/>
+    <input type="text" id="txtCoste" placeholder="Coste"/>
+    <input type="text" id="txtVenta" placeholder="Venta"/>
+    <input type="button" id="btnGuardar" value="Guardar"/>
+</div>
+
+@section MiJavaScript
+{
+    <script>
+        $("#btnBus").click(function() {
+            var url = "@Url.Action("Buscar")";
+            var txt = $("#txtBusqueda").val();
+            url += "?nombre=" + txt; // nombre es quien lo enlaza
+
+            $("#listado").load(url); // por defecto el carga sobre el listado
+        });
+
+        $("#btnGuardar").click(alta); 
+
+        function alta() {
+            var data = {
+                id_categoria: $("#txtIdCategoria").val(),
+                nombre: $("#txtNombre").val(),
+                descripcion_corta: $("#txtDescripcion").val(),
+                precio_coste: $("#txtCoste").val(),
+                precio_venta: $("#txtVenta").val(),
+                fabricante_nombre: $("#txtFabricante").val()
+            };
+            var url = "@Url.Action("Alta")";
+
+            $.ajax({
+                url: url,
+                data: JSON.stringify(data),
+                type: "POST", // puede ser GET
+                headers: { "Content-Type": "application/json" },
+                dataType: "json",
+                success: function(res) {
+                    if (res.id_producto > 0) {
+                        // volver a cargar
+                    } else {
+                        alert("Error al guardar");
+                    }
+                }
+            });
+        }
+
+    </script>
+
+
+
+
+}
+
