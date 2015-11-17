@@ -7,7 +7,7 @@ using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
 {
-    public class ProductoController : Controller
+    public class ProductoController : BaseController
     {
         // Conexion a base de datos con Entity
         Tienda25Entities db = new Tienda25Entities();

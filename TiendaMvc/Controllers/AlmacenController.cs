@@ -10,7 +10,7 @@ using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
 {
-    public class AlmacenController : Controller
+    public class AlmacenController : BaseController
     {
 
         // Conexion a base de datos con Entity
