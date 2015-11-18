@@ -85,7 +85,8 @@
             var txt = $("#txtBusqueda").val();
             url += "?nombre=" + txt; // nombre es quien lo enlaza
 
-            $("#listado").load(url); // por defecto el carga sobre el listado
+            $("#listado").load(encodeURI(url)); // por defecto realiza la carga sobre el listado
+                                                // encodeURI: en caso de usar busqueda con espacio en blanco
 
         }
 
