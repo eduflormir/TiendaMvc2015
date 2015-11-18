@@ -6,35 +6,45 @@
 
 <h2>Productos</h2>
 
-<input type="text" id="txtBusqueda" placeholder="Texto a buscar..."/>
-<input type="button" id="btnBus" value="Buscar"/>
+<input type="text" id="txtBusqueda" placeholder="Texto a buscar..." />
+<input type="button" id="btnBus" value="Buscar" class="btn btn-info"/>
+
+<button type="button" id="btnAdd" class="btn btn-info" data-toggle="modal" data-target="#dlgAdd">
+    Añadir
+</button>
 
 <div id="listado">
     @Html.Partial("_listadoProducto", Model)
 </div>
 
-<div>
-    <input type="text" id="txtIdCategoria" placeholder="Id Categoria" />
-    <input type="text" id="txtNombre" placeholder="Nombre"/>
-    <input type="text" id="txtDescripcion" placeholder="Descripción"/>
-    <input type="text" id="txtFabricante" placeholder="Fabricante"/>
-    <input type="text" id="txtCoste" placeholder="Coste"/>
-    <input type="text" id="txtVenta" placeholder="Venta"/>
-    <input type="button" id="btnGuardar" value="Guardar"/>
-</div>
+<div class="modal fade" id="dlgAdd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nuevo producto</h4>
+            </div>
+            <div class="modal-body">
+                @*Pegar formulario*@
+                <input type="text" id="txtIdCategoria" placeholder="Id Categoria" />
+                <input type="text" id="txtNombre" placeholder="Nombre" />
+                <input type="text" id="txtDescripcion" placeholder="Descripción" />
+                <input type="text" id="txtFabricante" placeholder="Fabricante" />
+                <input type="text" id="txtCoste" placeholder="Coste" />
+                <input type="text" id="txtVenta" placeholder="Venta" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 @section MiJavaScript
 {
     <script>
-        $("#btnBus").click(function() {
-            var url = "@Url.Action("Buscar")";
-            var txt = $("#txtBusqueda").val();
-            url += "?nombre=" + txt; // nombre es quien lo enlaza
 
-            $("#listado").load(url); // por defecto el carga sobre el listado
-        });
-
-        $("#btnGuardar").click(alta); 
 
         function alta() {
             var data = {
@@ -55,13 +65,45 @@
                 dataType: "json",
                 success: function(res) {
                     if (res.id_producto > 0) {
-                        // volver a cargar
+                        $("#dlgAdd").modal('hide'); // para ocultar el dialogo Modal
+                        $("#txtBusqueda").val("");
+                        listado();
+                        //alert("Guardado");
+
                     } else {
                         alert("Error al guardar");
                     }
                 }
             });
         }
+
+        
+
+        function listado() {
+
+            var url = "@Url.Action("Buscar")";
+            var txt = $("#txtBusqueda").val();
+            url += "?nombre=" + txt; // nombre es quien lo enlaza
+
+            $("#listado").load(url); // por defecto el carga sobre el listado
+
+        }
+
+        function limpiarFormulario() {
+            $("#txtIdCategoria").val("");
+            $("#txtNombre").val("");
+            $("#txtDescripcion").val("");
+            $("#txtCoste").val("");
+            $("#txtVenta").val("");
+            $("#txtFabricante").val("");
+        }
+
+        $("#btnGuardar").click(alta);
+
+        $("#btnBus").click(listado);
+
+        $("#btnAdd").click(limpiarFormulario);
+
 
     </script>
 
